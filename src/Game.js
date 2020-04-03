@@ -28,6 +28,15 @@ const reorder = (list, startIndex, endIndex) => {
  * Moves an item from one list to another list.
  */
 const move = (source, destination, newOwner, sourceIndex, destIndex, sourceLocation, destLocation) => {
+  if (destLocation === "crossroadsWorldTiles" && destination.length === 4) {
+    return false;
+  } else if (destLocation === "crossroadsPocketTiles" && destination.length === 3) {
+    return false;
+  } else if (destLocation === "onwardsWorldTiles" && destination.length === 3) {
+    return false;
+  } else if (destLocation === "onwardsPocketTiles" && destination.length === 16) {
+    return false;
+  }
   const [removed] = source.splice(sourceIndex, 1); // Remove one element and pop it into [removed]
   destination.splice(destIndex, 0, removed); // Splice [removed] at the destination index (and delete 0 elements)
   let reorderedSource = source.map((tile, index) => tile = { ...tile, index: index, modtime: Date.now(), location: sourceLocation })
