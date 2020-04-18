@@ -296,7 +296,7 @@ class Game extends React.Component {
   archiveGame() {
     let archiveData = {
       date: Date.now(),
-      notes: this.state.archivalNotes,
+      notes: this.state.archivalNotes || 'No notes recorded.',
       world: this.state.playedTiles.filter(tile => tile.location === 'onwardsWorldTiles').sort(idSort)
     }
     Firebase.database().ref('/archives').push(
@@ -329,7 +329,6 @@ class Game extends React.Component {
     Firebase.database().ref('rooms/' + this.state.room + '/archivalNotes').set(
       inputText
     )
-    console.log(inputText)
   }
 
   takenAlert(player) {
@@ -455,20 +454,50 @@ class GameSidebar extends React.Component {
             <div>
               <p>
                 This is the <strong>second stage</strong> of the game.
-            </p>
+              </p>
+              <p>
+                You meet your fellow travellers at the <strong>Crossorads</strong>. Taking turns, tell the others the story of the world you created in the first stage.
+              </p>
+              <p>
+                There are three new tiles in your <strong>Pocket</strong>. Taking turns again, take one tile from your Pocket, give it a name, and place it anywhere on the card of the player to your <strong>left</strong>.
+              </p>
+              <p>
+                Explain how the tile you placed relates to the story told by this fellow traveller. Is it an object they need? An expression of emotion? An offer of help? After the last player has taken their turn, take a moment as a group to contemplate how your stories are moving, and the shape they are taking as they are loosened from their origins.
+              </p>
+              <p>
+                When you are all done, press the button below.
+              </p>
               <button type="button" onClick={() => this.props.changeStage('onwards')} className="pure-button" >Onwards</button>
             </div>
             : this.props.gameStage === "onwards" ?
               <div>
                 <p>
-                  This is the <strong>third stage</strong> of the game.
-            </p>
+                  This is the <strong>third and final stage</strong> of the game.
+                </p>
+                <p>
+                  In your <strong>Pocket</strong> are all the tiles you have played - the collective language with which you have told the stories of your worlds.
+                </p>
+                <p>
+                  Working together, choose three tiles and arrange them in any order on the card named <strong>Onwards</strong>.
+                </p>
+                <p>
+                  The arrangement of the tiles represents the world to which you are travelling together. What do they tell you about <strong>all of you?</strong> Take a few moments to talk about this world. How will you get there? What will you bring with you? What will you leave behind?
+                </p>
+                <p>
+                  When you are all done, press the button below.
+                </p>
                 <button type="button" onClick={() => this.props.changeStage('after')} className="pure-button" >Finish</button>
               </div>
               : this.props.gameStage === "after" ?
                 <div>
                   <p>
-                    The game has ended.
+                    The game has ended. This is your world.
+                  </p>
+                  <p>
+                    You now have an opportunity to archive this world for future travellers and researchers in a publicly accessible space. If you would like to do so, write some notes on this world, drawing from your gameplay. When you are done, press the <strong>Archive</strong> button below.
+                  </p>
+                  <p>
+                    You may also choose to discard this world. It will vanish into the sea of worlds, and one day someone might stumble on it again. If you would like to do this, press the <strong>Return</strong> button below.
                   </p>
                   <button type="button" onClick={this.props.archiveGame} className="pure-button" style={{ display: 'block' }} >Archive this game</button>
                   <Link to="/" className="pure-button" style={{ marginTop: '20px', display: 'block', width: 'min-content' }}>Return to the Introduction</Link>

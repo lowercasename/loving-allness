@@ -3,7 +3,6 @@ import Firebase from 'firebase';
 import NonDraggableTile from './NonDraggableTile'
 
 import {
-  BrowserRouter as Router,
   Link
 } from "react-router-dom";
 
@@ -20,9 +19,8 @@ export default class Archive extends React.Component {
   componentDidMount() {
     let ref = Firebase.database().ref('archives');
     ref.on('value', snapshot => {
-      console.log(snapshot.val())
       this.setState({
-        archives: snapshot.val()
+        archives: snapshot.val() || []
       })
     })
   }
@@ -48,7 +46,7 @@ export default class Archive extends React.Component {
             <Link to="/" className="pure-button" style={{ marginTop: '20px' }}>Return to the Introduction</Link>
             <h1>Archive</h1>
             {Object.keys(this.state.archives).map((key, index) => (
-              <div className="pure-g archive__row">
+              <div key={index} className="pure-g archive__row">
                 <div className="pure-u-1-4">
                   <div className="droparea">
                     <div className='world-card droparea__tilestack'>

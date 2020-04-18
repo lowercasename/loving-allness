@@ -1,7 +1,6 @@
 import React from 'react';
 import Firebase from 'firebase';
 import config from './FirebaseConfig';
-import './App.css';
 import Game from './Game';
 import Archive from './Archive';
 
@@ -90,12 +89,23 @@ class Introduction extends React.Component {
     }
     return (
       <div className="pure-g">
-        <div className="pure-u-1">
+        <div className="pure-u-1 pure-u-md-1-2" style={{ margin: '0 auto' }}>
           <main className="introduction">
-            <h1>Loving Allness</h1>
-            <img src="/tiles/tile12.jpg" style={{ width: '200px' }} alt="Loving Allness logo" />
+            <h1 style={{ textAlign: 'center' }}>Loving Allness</h1>
+            <img src="/tiles/tile12.jpg" style={{ width: '200px', margin: '0 auto', display: 'block' }} alt="Loving Allness logo" />
+            <p>
+              At a crossroads between different worlds, you meet a group of travellers. You are all strangers to each other, but share a common goal - to create a new world to travel to, leaving your old ones behind.
+            </p>
+            <p>You will build this world in three stages:</p>
+            <ol>
+              <li>Firstly, tell the story of the worlds each of you came from.</li>
+              <li>Secondly, meet at the crossroads of all present worlds by contributing to the stories of others.</li>
+              <li>Lastly, create a new world you will travel to together, constructed from all that you have spoken about and learned of each other.</li>
+            </ol>
+            <p>A game of Loving Allness is played with <strong>two to four players</strong> and takes between <strong>twenty and forty minutes</strong> to play, although it can also be played solitaire.</p>
+            <p>Before you start playing, come together using a method of communication with which you are all familiar and comfortable, such as an audio or video call. Then, one of you should press the button below and share the generated link with the other players.</p>
             <button type="button" className="pure-button button-xlarge" onClick={this.createNewRoom}>New game</button>
-            <Link to="/archive" className="pure-button" style={{ marginTop: '20px' }}>View archive of previous worlds</Link>
+            <Link to="/archive" className="pure-button" style={{ display: 'block', width: 'min-content', margin: '20px auto' }}>View archive of previous worlds</Link>
           </main>
         </div>
       </div>
