@@ -8,6 +8,7 @@ import {
 import Before from './Before'
 import Crossroads from './Crossroads'
 import Onwards from './Onwards'
+import After from './After'
 
 const idSort = (a, b) => {
   return (a.index > b.index) ? 1 : -1
@@ -64,13 +65,16 @@ class Game extends React.Component {
       crossroadsPocketTiles: [],
       crossroadsWorldTiles: [],
       onwardsPocketTiles: [],
-      onwardsWorldTiles: []
-      // crossroadsTiles: [{ name: 'alice' }, { name: 'bertha' }, { name: 'carol' }, { name: 'diana' }]
+      onwardsWorldTiles: [],
+      archivalNotes: '',
+      isArchived: false
     };
     this.selectPlayer = this.selectPlayer.bind(this);
     this.changeStage = this.changeStage.bind(this);
     this.handleMeaningUpdate = this.handleMeaningUpdate.bind(this);
+    this.handleArchivalNotesChange = this.handleArchivalNotesChange.bind(this);
     this.takenAlert = this.takenAlert.bind(this);
+    this.archiveGame = this.archiveGame.bind(this);
   }
 
   componentDidMount() {
@@ -97,14 +101,18 @@ class Game extends React.Component {
     let ref = Firebase.database().ref('rooms/' + this.state.room);
     ref.on('value', snapshot => {
       const room = snapshot.val();
-      let takenPlayers, playedTiles
+      let takenPlayers, playedTiles, archivalNotes, isArchived
 
       takenPlayers = room.players
       playedTiles = room.playedTiles
+      archivalNotes = room.archivalNotes
+      isArchived = room.archived
 
       this.setState({
+        isArchived: isArchived,
         takenPlayers: takenPlayers,
-        playedTiles: playedTiles
+        playedTiles: playedTiles,
+        archivalNotes: archivalNotes
       })
     });
   }
@@ -235,6 +243,12 @@ class Game extends React.Component {
         return alert("Before proceeding Onwards, each player's card must have four tiles on it, and each must be assigned a meaning.");
       }
       allowedToChange = true;
+    } else if (this.state.gameStage === "onwards") {
+      let finalTiles = this.state.playedTiles.filter(tile => tile.location === 'onwardsWorldTiles')
+      if (finalTiles.some(t => !t.meaning) || finalTiles.length < 3) {
+        return alert("Before ending the game, you must place three tiles on the Onwards card, and assign each one a meaning.");
+      }
+      allowedToChange = true;
     }
     if (allowedToChange) {
       let gameSessions = JSON.parse(localStorage.getItem('gameSessions'));
@@ -271,9 +285,24 @@ class Game extends React.Component {
             movedTiles
           )
           Firebase.database().ref('rooms/' + this.state.room + '/players/' + this.state.player + '/currentStage').set('onwards')
+        } else if (stage === "after") {
+          Firebase.database().ref('rooms/' + this.state.room + '/players/' + this.state.player + '/currentStage').set('after')
         }
       })
     }
+  }
+
+  archiveGame() {
+    let archiveData = {
+      notes: this.state.archivalNotes,
+      world: this.state.playedTiles.filter(tile => tile.location === 'onwardsWorldTiles').sort(idSort)
+    }
+    Firebase.database().ref('/archives').push(
+      archiveData,
+      err => console.log(err ? 'Error while adding to archive' : 'Added to archive')
+    )
+    Firebase.database().ref('rooms/' + this.state.room + '/archived').set(true)
+    return <Redirect to='/archive' />
   }
 
   handleMeaningUpdate(tileId, event) {
@@ -291,6 +320,16 @@ class Game extends React.Component {
     )
   }
 
+  handleArchivalNotesChange(event) {
+    let inputText = event.target.value
+    // Update Firebase
+    this.setState({ archivalNotes: inputText })
+    Firebase.database().ref('rooms/' + this.state.room + '/archivalNotes').set(
+      inputText
+    )
+    console.log(inputText)
+  }
+
   takenAlert(player) {
     if (this.state.takenPlayers) {
       if (Object.keys(this.state.takenPlayers).find(p => p === player)) {
@@ -300,7 +339,7 @@ class Game extends React.Component {
   }
 
   render() {
-    if (this.state.room === null || !this.state.gameStage.match(/^(before|crossroads|onwards)$/)) {
+    if (this.state.room === null || this.state.isArchived === true || !this.state.gameStage.match(/^(before|crossroads|onwards|after)$/)) {
       return <Redirect to='/' />
     }
     return (
@@ -310,7 +349,7 @@ class Game extends React.Component {
           <h1>Welcome to Loving Allness</h1>
           <p>Loving Allness is a game played with <strong>two to four players</strong> and takes between <strong>twenty and forty minutes</strong> to play.</p>
           <p>Give your friends the following link to let them join the game, and come together using a method of communication you are all comfortable with.</p>
-          <div className="highlight">https://loving-allness.mimir.computer/{this.state.room}</div>
+          <div className="highlight">https://loving-allness.mimir.computer/world/{this.state.room}</div>
           <p>To begin, select a character. Characters marked 'Taken' are already in use by someone else.</p>
           <div className="pure-button-group" role="group">
             <button type="button" className="pure-button" onClick={(e) => this.selectPlayer(e, 'alice')}>Alice {this.takenAlert('alice')}</button>
@@ -318,7 +357,6 @@ class Game extends React.Component {
             <button type="button" className="pure-button" onClick={(e) => this.selectPlayer(e, 'carol')}>Carol {this.takenAlert('carol')}</button>
             <button type="button" className="pure-button" onClick={(e) => this.selectPlayer(e, 'diana')}>Diana {this.takenAlert('diana')}</button>
           </div>
-
         </Modal>
         <div className="pure-g">
           <div className="pure-u-1 pure-u-md-1-4">
@@ -326,7 +364,8 @@ class Game extends React.Component {
               room={this.state.room}
               gameStage={this.state.gameStage}
               player={this.state.player}
-              changeStage={this.changeStage} />
+              changeStage={this.changeStage}
+              archiveGame={this.archiveGame} />
           </div>
           <div className="pure-u-1 pure-u-md-3-4">
             {this.state.gameStage === 'before' &&
@@ -361,6 +400,15 @@ class Game extends React.Component {
                 handleMeaningUpdate={this.handleMeaningUpdate}
                 takenPlayers={this.state.takenPlayers}
                 idSort={this.idSort}
+              />
+            }
+            {this.state.gameStage === 'after' &&
+              <After
+                player={this.state.player}
+                onwardsWorldTiles={this.state.playedTiles ? this.state.playedTiles.filter(tile => tile.location === 'onwardsWorldTiles').sort(idSort) : []}
+                takenPlayers={this.state.takenPlayers}
+                handleArchivalNotesChange={this.handleArchivalNotesChange}
+                archivalNotes={this.state.archivalNotes}
               />
             }
           </div>
@@ -400,7 +448,6 @@ class GameSidebar extends React.Component {
               When you are done, press the button below.
             </p>
             <button type="button" onClick={() => this.props.changeStage('crossroads')} className="pure-button" >To the Crossroads</button>
-
           </div>
           : this.props.gameStage === "crossroads" ?
             <div>
@@ -414,10 +461,18 @@ class GameSidebar extends React.Component {
                 <p>
                   This is the <strong>third stage</strong> of the game.
             </p>
+                <button type="button" onClick={() => this.props.changeStage('after')} className="pure-button" >Finish</button>
               </div>
-              :
-              <div>
-                A mistake has been made.
+              : this.props.gameStage === "after" ?
+                <div>
+                  <p>
+                    The game has ended.
+                  </p>
+                  <button type="button" onClick={this.props.archiveGame} className="pure-button" >Archive this game</button>
+                </div>
+                :
+                <div>
+                  A mistake has been made.
           </div>
         }
         {

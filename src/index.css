@@ -173,6 +173,28 @@ html, button, input, select, textarea,
   text-transform: uppercase;
 }
 
+.archival-notes {
+  width: 500px;
+}
+
+.archival-notes .droparea__tilestack,
+.archival-notes .droparea__title {
+  box-sizing: border-box;
+}
+
+.archival-notes .droparea__tilestack {
+  padding: 20px;
+  width: 490px;
+  height: 462px;
+}
+.archival-notes textarea {
+  height: 100%;
+  width: 100%;
+  border: none;
+  resize: none;
+  overflow-x: auto;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+}
 
 .modal {
   position: fixed;
@@ -284,4 +306,30 @@ html, button, input, select, textarea,
 @keyframes flip {
   0%   { left: 0; }
   100% { left: 100%; }
+}
+
+.archive {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.archive h1 {
+  text-align: center;
+}
+
+.archive__row {
+  margin-bottom: 40px;
+}
+
+.archive__notes {
+  box-sizing: border-box;
+  padding-left: 20px;
+  height: 462px;
+  overflow-x: auto;
+}
+
+.archive__notes p {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  text-align: left;
 }

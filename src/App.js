@@ -2,11 +2,12 @@ import React from 'react';
 import Firebase from 'firebase';
 import config from './FirebaseConfig';
 import './App.css';
-
 import Game from './Game';
+import Archive from './Archive';
 
 import {
   BrowserRouter as Router,
+  Link,
   Switch,
   Route,
   Redirect,
@@ -94,6 +95,7 @@ class Introduction extends React.Component {
             <h1>Loving Allness</h1>
             <img src="/tiles/tile12.jpg" style={{ width: '200px' }} alt="Loving Allness logo" />
             <button type="button" className="pure-button button-xlarge" onClick={this.createNewRoom}>New game</button>
+            <Link to="/archive" className="pure-button" style={{ marginTop: '20px' }}>View archive of previous worlds</Link>
           </main>
         </div>
       </div>
@@ -123,6 +125,7 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route exact path="/" component={Introduction} />
+            <Route exact path="/archive" component={Archive} />
             <Route path="/world/:room" children={<Game />} />
           </Switch>
         </div>
