@@ -13,6 +13,8 @@ export default class Archive extends React.Component {
     this.state = {
       archives: []
     }
+
+    this.convertToDate = this.convertToDate.bind(this);
   }
 
   componentDidMount() {
@@ -25,12 +27,25 @@ export default class Archive extends React.Component {
     })
   }
 
+  convertToDate(timestamp) {
+    var a = new Date(timestamp);
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    // var hour = a.getHours();
+    // var min = a.getMinutes();
+    // var sec = a.getSeconds();
+    var string = date + ' ' + month + ' ' + year;
+    return string;
+  }
+
   render() {
     return (
       <div className="pure-g">
         <div className="pure-u-1">
           <main className="archive">
-            <Link to="/" className="pure-button" style={{ marginTop: '20px' }}>To the beginning</Link>
+            <Link to="/" className="pure-button" style={{ marginTop: '20px' }}>Return to the Introduction</Link>
             <h1>Archive</h1>
             {Object.keys(this.state.archives).map((key, index) => (
               <div className="pure-g archive__row">
@@ -48,6 +63,7 @@ export default class Archive extends React.Component {
                   </div>
                 </div>
                 <div className="pure-u-3-4 archive__notes">
+                  <p><strong>Notes from World of {this.convertToDate(this.state.archives[key].date)}</strong></p>
                   <p>{this.state.archives[key].notes}</p>
                 </div>
               </div>

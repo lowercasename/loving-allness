@@ -2,7 +2,8 @@ import React from 'react';
 import Firebase from 'firebase';
 import {
   Redirect,
-  withRouter
+  withRouter,
+  Link
 } from "react-router-dom";
 
 import Before from './Before'
@@ -294,6 +295,7 @@ class Game extends React.Component {
 
   archiveGame() {
     let archiveData = {
+      date: Date.now(),
       notes: this.state.archivalNotes,
       world: this.state.playedTiles.filter(tile => tile.location === 'onwardsWorldTiles').sort(idSort)
     }
@@ -468,7 +470,8 @@ class GameSidebar extends React.Component {
                   <p>
                     The game has ended.
                   </p>
-                  <button type="button" onClick={this.props.archiveGame} className="pure-button" >Archive this game</button>
+                  <button type="button" onClick={this.props.archiveGame} className="pure-button" style={{ display: 'block' }} >Archive this game</button>
+                  <Link to="/" className="pure-button" style={{ marginTop: '20px', display: 'block', width: 'min-content' }}>Return to the Introduction</Link>
                 </div>
                 :
                 <div>
