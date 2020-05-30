@@ -366,19 +366,19 @@ class Game extends React.Component {
                 <p>To begin, select a character. Characters marked 'Taken' are already in use by someone else.</p>
                 <div className="flex-row">
                   <div>
-                    <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'bertha')}><img src="/avatars/Bertha.png" alt="Bertha" /></button>
+                    <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'bertha')}><img src="/avatars/Bertha.png" alt="Bertha" style={{width: '120px', height: '120px', display: 'block'}}/></button>
                     <p>{this.takenAlert('bertha')}</p>
                   </div>
                   <div>
-                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'carol')}><img src="/avatars/Carol.png" alt="Carol" /></button>
+                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'carol')}><img src="/avatars/Carol.png" alt="Carol" style={{width: '120px', height: '120px', display: 'block'}}/></button>
                   <p>{this.takenAlert('carol')}</p>
                   </div>
                   <div>
-                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'alice')}><img src="/avatars/Alice.png" alt="Alice" /></button>
+                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'alice')}><img src="/avatars/Alice.png" alt="Alice" style={{width: '120px', height: '120px', display: 'block'}}/></button>
                   <p>{this.takenAlert('alice')}</p>
                   </div>
                   <div>
-                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'diana')}><img src="/avatars/Diana.png" alt="Diana" /></button>
+                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'diana')}><img src="/avatars/Diana.png" alt="Diana" style={{width: '120px', height: '120px', display: 'block'}}/></button>
                   <p>{this.takenAlert('diana')}</p>
                   </div>
 

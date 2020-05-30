@@ -17,7 +17,7 @@ export default class Crossroads extends React.Component {
         <main className="gameboard gameboard--crossroads">
           <div className="gameboard__playing-as">
             {this.props.prettyPlayerName &&
-              <div class="bordered-box grid-box" style={{ justifyContent: 'center', flexDirection: 'column' }}>
+              <div class="bordered-box grid-box" style={{ justifyContent: 'center', flexDirection: 'column', flexWrap: 'nowrap' }}>
                 <p>You are playing as:</p>
                 <img class="avatar" src={"/avatars/" + this.props.prettyPlayerName + ".png"} alt={this.props.prettyPlayerName} />
               </div>
