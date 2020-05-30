@@ -1,0 +1,22 @@
+.gameboard--after {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 420px);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 30px 30px;
+  grid-template-areas: "gameboard__information gameboard__world-title gameboard__world-title" "gameboard__information gameboard__world gameboard__world" "gameboard__information gameboard__world gameboard__world" "gameboard__information gameboard__world gameboard__world" ". gameboard__notes-title gameboard__notes-title" "gameboard__finish-button gameboard__notes gameboard__notes" "gameboard__return-button gameboard__notes gameboard__notes";
+}
+
+.gameboard--after .gameboard__notes { grid-area: gameboard__notes; }
+
+.gameboard--after .gameboard__notes-title { grid-area: gameboard__notes-title; }
+
+.gameboard--after .gameboard__finish-button { grid-area: gameboard__finish-button; }
+
+.gameboard--after .gameboard__return-button { grid-area: gameboard__return-button; }
+
+.gameboard--after .gameboard__information { grid-area: gameboard__information; }
+
+.gameboard--after .gameboard__world { grid-area: gameboard__world; }
+
+.gameboard--after .gameboard__world-title { grid-area: gameboard__world-title; }

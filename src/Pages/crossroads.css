@@ -1,0 +1,44 @@
+.gameboard--crossroads {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 420px);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 30px 30px;
+  grid-template-areas: "gameboard__playing-as gameboard__worlds-container gameboard__worlds-container" "gameboard__playing-as gameboard__worlds-container gameboard__worlds-container" "gameboard__information gameboard__worlds-container gameboard__worlds-container" "gameboard__information gameboard__worlds-container gameboard__worlds-container" "gameboard__information gameboard__worlds-container gameboard__worlds-container" "gameboard__information gameboard__worlds-container gameboard__worlds-container" "gameboard__next-button gameboard__worlds-container gameboard__worlds-container";
+}
+
+.gameboard--crossroads .gameboard__playing-as { grid-area: gameboard__playing-as; }
+
+.gameboard--crossroads .gameboard__information { grid-area: gameboard__information; }
+
+.gameboard--crossroads .gameboard__next-button { grid-area: gameboard__next-button; }
+
+.gameboard--crossroads .gameboard__worlds-container {
+  grid-area: gameboard__worlds-container;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: grid;
+  grid-template-columns: 420px;
+  grid-auto-flow: column;
+  grid-gap: 30px;
+}
+
+.gameboard--crossroads .gameboard__worlds-container > .crossroads-world-grid-container:not(:last-of-type) {
+  /* margin-right: 30px; */
+}
+
+.gameboard--crossroads .crossroads-world-grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 30px 30px;
+}
+
+.crossroads-world-grid-container .gameboard__pocket-title { grid-area: 1 / 1 / 2 / 2; }
+
+.crossroads-world-grid-container .gameboard__pocket { grid-area: 2 / 1 / 8 / 2; }
+
+.crossroads-world-grid-container .gameboard__world-title { grid-area: 1 / 1 / 2 / 2; }
+
+.crossroads-world-grid-container .gameboard__world { grid-area: 2 / 1 / 8 / 2; }

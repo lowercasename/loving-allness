@@ -1,0 +1,22 @@
+.gameboard--before {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 420px);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 30px 30px;
+  grid-template-areas: "gameboard__playing-as gameboard__pocket-title gameboard__world-title" "gameboard__playing-as gameboard__pocket gameboard__world" "gameboard__information gameboard__pocket gameboard__world" "gameboard__information gameboard__pocket gameboard__world" "gameboard__information gameboard__pocket gameboard__world" "gameboard__information gameboard__pocket gameboard__world" "gameboard__next-button gameboard__pocket gameboard__world";
+}
+
+.gameboard--before .gameboard__playing-as { grid-area: gameboard__playing-as; }
+
+.gameboard--before .gameboard__next-button { grid-area: gameboard__next-button; }
+
+.gameboard--before .gameboard__information { grid-area: gameboard__information; }
+
+.gameboard--before .gameboard__pocket-title { grid-area: gameboard__pocket-title; }
+
+.gameboard--before .gameboard__world-title { grid-area: gameboard__world-title; }
+
+.gameboard--before .gameboard__pocket { grid-area: gameboard__pocket; }
+
+.gameboard--before .gameboard__world { grid-area: gameboard__world; }
