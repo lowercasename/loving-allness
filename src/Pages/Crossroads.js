@@ -81,7 +81,7 @@ export default class Crossroads extends React.Component {
                   <div className="crossroads-world-grid-container" key={player}>
                     <div className="gameboard__world-title">
                       <div class="bordered-box grid-box" style={{ justifyContent: 'center' }}>
-                        <h2>{player}</h2>
+                        <img className="world__avatar" src={"/avatars/" + player.charAt(0).toUpperCase() + player.slice(1) + '.png'} alt={player.charAt(0).toUpperCase() + player.slice(1)} />
                       </div>
                     </div>
                     <div className="gameboard__world" >

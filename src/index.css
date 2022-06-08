@@ -112,7 +112,6 @@ h2 {
 .avatar {
   width: 120px;
   height: 120px;
-  margin-top: 20px;
 }
 
 .counter-container {
@@ -130,6 +129,20 @@ h2 {
   border-radius: 4px;
   height: 8px;
   margin-bottom: 16px;
+}
+
+.character-picker__avatar {
+  border: 1px solid #fcf8ea;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.world__avatar {
+  width: 60px;
+  height: 60px;
 }
 
 .square-button {
@@ -232,8 +245,8 @@ h2 {
 
 .tile {
   user-select: none;
-  width: 110px;
-  height: 160px;
+  width: 100%;
+  height: 120px;
 }
 
 .tile__image {
@@ -241,41 +254,36 @@ h2 {
   background-size: contain;
   border: 1px solid #fcf8ea;
   border-radius: 10px;
-  width: 110px;
-  height: 110px;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
 }
 
 .tile__meaning {
   text-align: center;
   border: none;
-  width: 110px;
-  margin-top: 10px;
-  /* margin-bottom: 10px; */
+  width: 100%;
+  margin: 10px auto 0 auto;
   background: transparent;
   text-transform: uppercase;
 }
 
 .droparea {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: #051a2d;
   border: 1px solid #fcf8ea;
+  background: #051a2d;
   border-radius: 20px;
+  height: 100%;
 }
 
 .droparea__tilestack {
   transition: .05s ease-in;
-  padding: 0 150px;
-  min-width: 300px;
-  width: 100%;
   border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  padding-top: 100px;
 }
 
-.gameboard--before .pocket,
+/* .gameboard--before .pocket,
 .gameboard--before .world-card {
   height: 480px;
 }
@@ -284,7 +292,7 @@ h2 {
 .gameboard--crossroads .world-card {
   height: 640px;
   margin-top: auto;
-}
+} */
 
 .gameboard--onwards .pocket {
   display: flex;
@@ -311,6 +319,8 @@ h2 {
 .gameboard--after .world-card .tile {
   display: inline-block;
   margin: 0 100px;
+  width: 110px;
+  height: 110px;
 }
 
 .gameboard--onwards .pocket .tile {
@@ -323,6 +333,13 @@ h2 {
   width: 60px;
   height: 60px;
 }
+
+.gameboard--onwards .world-card .tile__image,
+.gameboard--after .world-card .tile__image  {
+  width: 110px;
+  height: 110px;
+}
+
 
 .gameboard--onwards .pocket .tile__meaning {
   width: 80px;
@@ -389,6 +406,17 @@ h2 {
 
 .display-flex {
   display: flex;
+}
+
+.footer {
+  font-size: smaller;
+  color: rgba(255, 246, 215, 1);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.footer a {
+  color: rgba(255, 246, 215, 1);
 }
 
 .loading-screen {

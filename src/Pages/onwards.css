@@ -1,7 +1,7 @@
 .gameboard--onwards {
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 420px);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(7, 1fr);
   gap: 30px 30px;
   grid-template-areas: "gameboard__playing-as gameboard__information gameboard__information gameboard__information" "gameboard__playing-as gameboard__information gameboard__information gameboard__information" "gameboard__world-title gameboard__world gameboard__world gameboard__world" ". gameboard__world gameboard__world gameboard__world" ". gameboard__world gameboard__world gameboard__world" "gameboard__pocket-title gameboard__pocket gameboard__pocket gameboard__pocket" "gameboard__finish-button gameboard__pocket gameboard__pocket gameboard__pocket";

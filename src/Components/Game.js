@@ -356,7 +356,7 @@ class Game extends React.Component {
               archiveGame={this.archiveGame} />
           </div> */}
           {this.state.showPlayerSelector ?
-            <div style={{display: 'flex', flexDirection: 'column', maxWidth: '840px'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '840px' }}>
               <div className="bordered-box grid-box" style={{ textAlign: 'center', marginBottom: '30px' }}>
                 <p>Loving Allness is a game played with <strong>2 to 4 players</strong> and takes between <strong>20 and 40 minutes</strong> to play.</p>
                 <p>Give your friends the following link to let them join the game, and come together using a method of communication you are all comfortable with.</p>
@@ -366,22 +366,21 @@ class Game extends React.Component {
                 <p>To begin, select a character. Characters marked 'Taken' are already in use by someone else.</p>
                 <div className="flex-row">
                   <div>
-                    <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'bertha')}><img src="/avatars/Bertha.png" alt="Bertha" style={{width: '120px', height: '120px', display: 'block'}}/></button>
+                    <img className="character-picker__avatar" src="/avatars/Bertha.png" alt="Bertha" onClick={(e) => this.selectPlayer(e, 'bertha')} />
                     <p>{this.takenAlert('bertha')}</p>
                   </div>
                   <div>
-                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'carol')}><img src="/avatars/Carol.png" alt="Carol" style={{width: '120px', height: '120px', display: 'block'}}/></button>
-                  <p>{this.takenAlert('carol')}</p>
+                    <img className="character-picker__avatar" src="/avatars/Carol.png" alt="Carol" onClick={(e) => this.selectPlayer(e, 'carol')} />
+                    <p>{this.takenAlert('carol')}</p>
                   </div>
                   <div>
-                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'alice')}><img src="/avatars/Alice.png" alt="Alice" style={{width: '120px', height: '120px', display: 'block'}}/></button>
-                  <p>{this.takenAlert('alice')}</p>
+                    <img className="character-picker__avatar" src="/avatars/Alice.png" alt="Alice" onClick={(e) => this.selectPlayer(e, 'alice')} />
+                    <p>{this.takenAlert('alice')}</p>
                   </div>
                   <div>
-                  <button type="button" className="pure-button square-button square-button-sm" onClick={(e) => this.selectPlayer(e, 'diana')}><img src="/avatars/Diana.png" alt="Diana" style={{width: '120px', height: '120px', display: 'block'}}/></button>
-                  <p>{this.takenAlert('diana')}</p>
+                    <img className="character-picker__avatar" src="/avatars/Diana.png" alt="Diana" onClick={(e) => this.selectPlayer(e, 'diana')} />
+                    <p>{this.takenAlert('diana')}</p>
                   </div>
-
                 </div>
               </div>
             </div>

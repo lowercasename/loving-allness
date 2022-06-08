@@ -59,6 +59,14 @@ const generateTiles = (count) => {
     })
   }
   shuffle(tiles);
+  // console.log(tiles)
+  // console.log(tiles.length)
+  // let orderedTiles = [];
+  // tiles.forEach(t => {
+  //   orderedTiles.push(t.number);
+  // })
+  // orderedTiles.sort();
+  // console.log(orderedTiles)
   return tiles;
 }
 
@@ -113,7 +121,10 @@ class Introduction extends React.Component {
         <div className="pure-u-1 pure-u-md-1-5" style={{ display: 'flex', justifyContent: 'center' }}>
           <Link to="/archive" className="pure-button square-button">Archive of previous worlds</Link>
         </div>
-      </div >
+        <div className="pure-u-1 footer">
+          Loving Allness is a game of worlds by <a href="https://sinjinli.com/">Sinjin Li</a> and <a href="https://raphaelkabo.com">Raphael Kabo</a>. &copy; 2020.
+        </div>
+      </div>
     )
   }
 }
